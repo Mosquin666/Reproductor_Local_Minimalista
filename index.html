@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b08">
+<title>musica@local</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="crt"></div>
+
+<div class="app">
+
+  <header class="topbar">
+    <div class="prompt-line">
+      <span class="user">musica@local</span><span class="colon">:</span><span id="path" class="path">~</span><span class="dollar"> $</span>
+      <span class="cursor" id="headerCursor">▮</span>
+    </div>
+    <button id="rootBtn" class="ghost-btn" title="Elegir carpeta">carpeta ▾</button>
+  </header>
+
+  <nav class="crumbs" id="crumbs" aria-label="ruta"></nav>
+
+  <main class="listing" id="listing">
+    <div class="empty-state" id="emptyState">
+      <p># no hay ninguna carpeta montada</p>
+      <p>&gt; tocá <strong>[carpeta ▾]</strong> para elegir tu música</p>
+    </div>
+    <ul id="fileList" class="file-list" hidden></ul>
+  </main>
+
+  <footer class="player" id="player" hidden>
+    <div class="now-playing">
+      <span class="np-icon">♪</span>
+      <span id="trackName" class="np-name">—</span>
+      <span class="cursor" id="playerCursor">▮</span>
+    </div>
+
+    <div class="seek-row">
+      <span id="curTime" class="time">00:00</span>
+      <div class="progress" id="progress" role="slider" aria-label="progreso" tabindex="0"
+           aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="progress-fill" id="progressFill"></div>
+        <div class="progress-handle" id="progressHandle"></div>
+      </div>
+      <span id="durTime" class="time">00:00</span>
+    </div>
+
+    <div class="controls">
+      <button id="prevBtn" class="ctrl-btn" aria-label="anterior">⏮</button>
+      <button id="playBtn" class="ctrl-btn ctrl-btn--main" aria-label="play/pausa">▶</button>
+      <button id="nextBtn" class="ctrl-btn" aria-label="siguiente">⏭</button>
+      <div class="vol-wrap">
+        <span class="vol-icon">vol</span>
+        <input id="volume" class="vol-slider" type="range" min="0" max="1" step="0.01" value="1" aria-label="volumen">
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" hidden></div>
+</div>
+
+<audio id="audio" preload="metadata"></audio>
+
+<input type="file" id="folderInputFallback" webkitdirectory directory multiple hidden>
+
+<script src="app.js"></script>
+</body>
+</html>
